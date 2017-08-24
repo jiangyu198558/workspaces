@@ -1,0 +1,15 @@
+#sidebar {
+  width: 30%;
+  background-color: #faa; }
+
+#footer2 {
+  width: 200px;
+  height: 100px;
+  border-width: 1px;
+  border-color: #ccc;
+  border-style: solid; }
+
+#main {
+  border: 1px solid red; }
+
+/*# sourceMappingURL=main.css.map */
