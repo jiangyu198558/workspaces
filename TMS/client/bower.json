@@ -1,0 +1,25 @@
+{
+  "name": "tms_client",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "bl.jiang"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "TMS",
+    "Management"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "^3.2.1",
+    "angular": "1.4.7"
+  }
+}
