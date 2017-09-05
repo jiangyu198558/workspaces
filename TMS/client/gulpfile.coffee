@@ -2,6 +2,7 @@
 gulp = require('gulp')
 del = require("del")
 uglify = require('gulp-uglify')
+concat = require('gulp-concat')
 minifyCss = require('gulp-minify-css')
 #unCss = require('gulp-uncss')
 browserSync = require('browser-sync').create()
@@ -37,7 +38,8 @@ gulp.task('miniJs', ->
 gulp.task('miniCss', ->
   gulp.src('./src/**/*.css')
   .pipe(minifyCss())
-  .pipe(gulp.dest('./dist/'))
+  .pipe(concat('app.css', {newLine: '\n'}))
+  .pipe(gulp.dest('./dist/assets/css/'))
 )
 
 gulp.task('concat', ->

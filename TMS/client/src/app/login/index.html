@@ -1,0 +1,26 @@
+<div class="login-container">
+    <div class="login-left"></div>
+    <div class="login-split"></div>
+    <div class="login-right">
+        <fieldset>
+            <legend>登录</legend>
+            <div>
+                <label for="">账户：</label>
+                <input type="text" ng-model="userEntity.username" placeholder="输入您的账户" />
+            </div>
+            <div>
+                <label for="">密码：</label>
+                <input type="password" ng-model="userEntity.password" placeholder="输入您的密码" />
+            </div>
+            <div>
+                <label for="">
+                    <input type="checkbox" ng-model="rememberMe"/>记住我
+                </label>
+            </div>
+            <div>
+                <button ng-click="doLogin();">登录</button>
+                <span>还没有账户？<a href="#/register">注册</a></span>
+            </div>
+        </fieldset>
+    </div>
+</div>

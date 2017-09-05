@@ -21,5 +21,9 @@
   "devDependencies": {
     "jquery": "^3.2.1",
     "angular": "1.4.7"
+  },
+  "dependencies": {
+    "angular-route": "1.4.7",
+    "bootstrap": "^3.3.7"
   }
 }

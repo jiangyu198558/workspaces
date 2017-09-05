@@ -1,0 +1,25 @@
+.login-container {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 50px;
+    display: flex;
+}
+
+.login-left, .login-right{
+    float: left;
+    height: 500px;
+    border: 1px solid red;
+}
+
+.login-left {
+    flex: 6;
+    margin-right: 50px;
+}
+
+.login-split {
+    flex: 1;
+}
+
+.login-right{
+    felx: 3;
+}
