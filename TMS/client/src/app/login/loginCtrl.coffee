@@ -1,5 +1,5 @@
 angular.module('tmsApp')
-.controller('LoginCtrl', ['$scope', ($scope)->
+.controller('LoginCtrl', ['$scope', '$location', ($scope, $location)->
     $scope.userEntity = {
       username: ''
       password: ''
@@ -7,4 +7,5 @@ angular.module('tmsApp')
     $scope.rememberMe = false
     $scope.doLogin = ->
       console.log($scope.userEntity)
+      $location.path('/').replace()
 ])

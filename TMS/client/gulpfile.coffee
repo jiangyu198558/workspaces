@@ -37,7 +37,7 @@ gulp.task('miniJs', ->
 
 gulp.task('miniCss', ->
   gulp.src('./src/**/*.css')
-  .pipe(minifyCss())
+  #.pipe(minifyCss())
   .pipe(concat('app.css', {newLine: '\n'}))
   .pipe(gulp.dest('./dist/assets/css/'))
 )

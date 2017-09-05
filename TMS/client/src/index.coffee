@@ -6,6 +6,9 @@ angular.module('tmsApp', ['ngRoute'])
     }).when('/register', {
         templateUrl: '/app/register/index.html'
         controller: 'RegisterCtrl'
+    }).when('/', {
+        templateUrl: '/app/index/index.html'
+        controller: 'IndexCtrl'
     })
 ])
 .run(['$location', ($location)->
