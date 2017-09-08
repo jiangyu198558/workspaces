@@ -7,9 +7,10 @@ minifyCss = require('gulp-minify-css')
 #unCss = require('gulp-uncss')
 browserSync = require('browser-sync').create()
 runSequence = require('run-sequence')
+fs = require('fs')
 
 # 获取参数
-
+assets = JSON.parse(fs.readFileSync('assets.json'));
 
 # 构建任务部分
 gulp.task('default', (callback)->
@@ -21,31 +22,45 @@ gulp.task('clean', (callback)->
 )
 
 gulp.task('build', (callback)->
-  runSequence(['copy', 'miniJs', 'miniCss'], callback)
+  runSequence(
+   ['assetsJs', 'assetsCss', 'assetsFonts'],
+   ['appJs', 'appCss', 'copyHtml'], 
+   callback
+  )
 )
 
-gulp.task('copy', ->
-  gulp.src('./src/**/*.*')
-  .pipe(gulp.dest('./dist/'))
+gulp.task('assetsJs', ->
+  gulp.src(assets.assetsJs)
+  .pipe(concat('assets.js', {newLine: '\n\n'}))
+  .pipe(gulp.dest('./dist/assets/js/'))
 )
 
-gulp.task('miniJs', ->
-  gulp.src('./src/**/*.js')
-  .pipe(uglify())
-  .pipe(gulp.dest('./dist/'))
-)
-
-gulp.task('miniCss', ->
-  gulp.src('./src/**/*.css')
-  #.pipe(minifyCss())
-  .pipe(concat('app.css', {newLine: '\n'}))
+gulp.task('assetsCss', ->
+  gulp.src(assets.assetsCss)
+  .pipe(concat('assets.css', {newLine: '\n'}))
   .pipe(gulp.dest('./dist/assets/css/'))
 )
 
-gulp.task('concat', ->
-  gulp.src('./src/*.js')
-  .pipe(concat('all.js', {newLine: '\n'}))
+gulp.task('assetsFonts', ->
+  gulp.src(assets.assetsFonts)
+  .pipe(gulp.dest('./dist/assets/fonts/'))
+)
+
+gulp.task('copyHtml', ->
+  gulp.src(['./src/**/*.html'])
   .pipe(gulp.dest('./dist/'))
+)
+
+gulp.task('appJs', ->
+  gulp.src(assets.appJs)
+  .pipe(concat('app.js', {newLine: '\n'}))
+  .pipe(gulp.dest('./dist/assets/js/'))
+)
+
+gulp.task('appCss', ->
+  gulp.src(assets.appCss)
+  .pipe(concat('app.css', {newLine: '\n'}))
+  .pipe(gulp.dest('./dist/assets/css/'))
 )
 
 gulp.task('serve', ->

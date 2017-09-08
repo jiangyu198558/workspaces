@@ -3,8 +3,9 @@ path = require('path')
 logger = require('morgan')
 bodyParser = require('body-parser')
 
-apiRouters = require('./routes/api')
-#users = require('./routes/users')
+apiRouters = require('./../routes/api')
+userRouters = require('./../routes/user')
+taskRouters = require('./../routes/task')
 
 app = express()
 
@@ -14,6 +15,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use('/api', apiRouters)
+app.use('/api', userRouters)
+app.use('/api', taskRouters)
 
 #catch 404 and forward to error handler
 app.use((req, res, next) ->
@@ -33,4 +36,4 @@ app.use((err, req, res, next) ->
   res.render('error')
 )
 
-module.exports = app;
+module.exports = app

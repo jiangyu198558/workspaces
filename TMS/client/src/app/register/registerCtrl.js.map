@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "registerCtrl.js",
+  "sourceRoot": "",
+  "sources": [
+    "registerCtrl.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;EAAA,OAAO,CAAC,MAAR,CAAe,QAAf,CACA,CAAC,UADD,CACY,cADZ,EAC4B,CAAC,QAAD,EAAW,SAAC,MAAD,GAAA,CAAX,CAD5B;AAAA"
+}

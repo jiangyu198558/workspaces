@@ -5,7 +5,7 @@ developServer = require('gulp-develop-server')
 notify = require('gulp-notify')
 
 gulp.task('default', (callback)->
-    runSequence(['clean'], ['copyFiles'], ['serve', 'watch'] callback)
+    runSequence(['clean'], ['copyFiles'], ['serve', 'watch'], callback)
 )
 
 gulp.task('clean', (callback)->
@@ -13,7 +13,7 @@ gulp.task('clean', (callback)->
 )
 
 gulp.task('copyFiles', ->
-    gulp.src('./src/**/*.js')
+    gulp.src(['./src/**/*.js', './src/database/**/*.db'])
     .pipe(gulp.dest('./dist/'))
 )
 
@@ -28,7 +28,7 @@ gulp.task('watch', ->
 )
 
 gulp.task('reload', (callback)->
-    runSequnce(['copyFilese'], ['reload-node'], callback)
+    runSequence(['copyFilese'], ['reload-node'], callback)
 )
 
 gulp.task('reload-node', ->
