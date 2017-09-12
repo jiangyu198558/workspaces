@@ -11,20 +11,32 @@
     </div>
     <div class="slide-right col-md-4 col-sm-5 col-xs-12 no-padding-right padding-left-sm">
         <div class="panel panel-primary">
-            <div class="panel-heading">任务面板</div>
+            <div class="panel-heading">任务面板
+                <button class="btn btn-default btn-xs pull-right" ng-click="exit();">
+                    <i class="glyphicon glyhicon-lock"></i>退出系统
+                </button>
+            </div>
             <div class="panel-body">
                 <div class="task-part">
                     <form action="" ng-submit="addTask();">
-                        <input type="text" class="form-control" placeholder="需要做什么？" required ng-model="task.description"/>
+                        <input type="text" class="form-control" placeholder="需要做什么？" required ng-model="task.taskName"/>
                     </form>
                     <hr />
                     <table class="table table-striped table-bordered table-hover task-list">
                         <tr ng-repeat="task in taskList track by $index">
-                            <td class="text-center task-check no-padding-right no-padding-left"><input type="checkbox" ng-model="task.checked"/></td>
-                            <td ng-class="{'task-completed': task.checked}">{{task.description}}</td>
+                            <td class="text-center task-check no-padding-right no-padding-left" ng-if="!task.isEditing"><input type="checkbox" ng-model="task.checked" ng-change="changeTaskStatus(task);"/></td>
+                            <td ng-class="{'task-completed': task.status==='Finish'}">
+                            <span ng-hide="task.isEditing">{{task.taskName}}</span>
+                            <input type="text" class="form-control input-sm" ng-model="task.tempTaskName" ng-show="task.isEditing"></td>
                             <td class="text-center task-operate no-padding-right no-padding-left">
-                                <button class="btn btn-default btn-xs">编辑</button>
-                                <button class="btn btn-danger btn-xs">删除</button>
+                                <div class="btn-group" ng-hide="task.isEditing" ng-if="!task.checked">
+                                    <button class="btn btn-default btn-xs" ng-click="editTask(task)">编辑</button>
+                                    <button class="btn btn-danger btn-xs" ng-click="deleteTask(task, $index)">删除</button>
+                                </div>
+                                <div class="btn-group" ng-show="task.isEditing">
+                                    <button class="btn btn-default btn-xs" ng-click="saveTask(task)">保存</button>
+                                    <button class="btn btn-danger btn-xs" ng-click="cancelEditTask(task, $index)">取消</button>
+                                </div>
                             </td>
                         </tr>
                     </table>

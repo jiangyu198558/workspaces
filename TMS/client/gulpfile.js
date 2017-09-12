@@ -29,7 +29,7 @@
   });
 
   gulp.task('build', function(callback) {
-    return runSequence(['assetsJs', 'assetsCss', 'assetsFonts'], ['appJs', 'appCss', 'copyHtml'], callback);
+    return runSequence(['assetsJs', 'assetsCss', 'assetsFonts'], ['appJs', 'appCss', 'copyHtml', 'configJs'], callback);
   });
 
   gulp.task('assetsJs', function() {
@@ -58,6 +58,10 @@
     })).pipe(gulp.dest('./dist/assets/js/'));
   });
 
+  gulp.task('configJs', function() {
+    return gulp.src(assets.configJs).pipe(gulp.dest('./dist/assets/js/'));
+  });
+
   gulp.task('appCss', function() {
     return gulp.src(assets.appCss).pipe(concat('app.css', {
       newLine: '\n'
@@ -69,7 +73,7 @@
       server: {
         baseDir: './dist/'
       },
-      port: 8888
+      port: 8008
     });
   });
 

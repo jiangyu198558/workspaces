@@ -16,7 +16,7 @@
       taskName: body.taskName,
       createDate: Date.now(),
       updateDate: Date.now(),
-      status: '未完成',
+      status: 'InProgress',
       deleted: false
     };
     return db.tasks.insert(data, function(err, task) {
@@ -26,7 +26,7 @@
       if (task) {
         return next('创建任务失败，请重试');
       }
-      return res.json(true);
+      return res.json(task);
     });
   };
 

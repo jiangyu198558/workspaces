@@ -9,13 +9,13 @@ addTask = (req, res, next)->
         taskName: body.taskName
         createDate: Date.now()
         updateDate: Date.now()
-        status: '未完成'
+        status: 'InProgress'
         deleted: false
     }
     db.tasks.insert(data, (err, task)->
         return next(err) if err
         return next('创建任务失败，请重试') if task
-        res.json(true)
+        res.json(task)
     )
 
 updateTask = (req, res, next)->

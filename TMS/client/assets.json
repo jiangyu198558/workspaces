@@ -13,7 +13,11 @@
     ],
     "appJs": [
         "./src/index.js",
+        "./src/services/*.js",
         "./src/app/**/*.js"
+    ],
+    "configJs": [
+        "./src/config/*.js"
     ],
     "appCss": [
         "./src/css/*.css"

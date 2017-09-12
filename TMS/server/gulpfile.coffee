@@ -13,7 +13,7 @@ gulp.task('clean', (callback)->
 )
 
 gulp.task('copyFiles', ->
-    gulp.src(['./src/**/*.js', './src/database/**/*.db'])
+    gulp.src(['./src/**/*.js', './src/database*/*.db'])
     .pipe(gulp.dest('./dist/'))
 )
 

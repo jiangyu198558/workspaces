@@ -18,11 +18,6 @@
 
   db.tasks.loadDatabase();
 
-  db.users.insert({
-    "username": "admin",
-    "password": "admin"
-  });
-
   module.exports = db;
 
 }).call(this);

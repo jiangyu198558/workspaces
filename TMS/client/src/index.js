@@ -14,8 +14,26 @@
       });
     }
   ]).run([
-    '$location', function($location) {
-      return $location.path('/login').replace();
+    '$location', '$http', '$route', function($location, $http, $route) {
+      var token;
+      token = localStorage.getItem('x-token');
+      if (token) {
+        return $http.post('#{Tms.apiAddress}/api/user/autologin', {
+          token: token
+        }).then(function(res) {
+          if (res.data === true) {
+            $http.defaults.headers.common['x-token'] = token;
+            localStorage.setItem('x-token', token);
+            return $route.reload();
+          } else {
+            return $location.path('/login').replace();
+          }
+        }, function() {
+          return $location.path('/login').replace();
+        });
+      } else {
+        return $location.path('/login').replace();
+      }
     }
   ]);
 

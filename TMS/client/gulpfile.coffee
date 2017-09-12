@@ -24,7 +24,7 @@ gulp.task('clean', (callback)->
 gulp.task('build', (callback)->
   runSequence(
    ['assetsJs', 'assetsCss', 'assetsFonts'],
-   ['appJs', 'appCss', 'copyHtml'], 
+   ['appJs', 'appCss', 'copyHtml', 'configJs'], 
    callback
   )
 )
@@ -57,6 +57,11 @@ gulp.task('appJs', ->
   .pipe(gulp.dest('./dist/assets/js/'))
 )
 
+gulp.task('configJs', ->
+  gulp.src(assets.configJs)
+  .pipe(gulp.dest('./dist/assets/js/'))
+)
+
 gulp.task('appCss', ->
   gulp.src(assets.appCss)
   .pipe(concat('app.css', {newLine: '\n'}))
@@ -68,7 +73,7 @@ gulp.task('serve', ->
     server: {
       baseDir: './dist/'
     }
-    port: 8888
+    port: 8008
   })
 )
 

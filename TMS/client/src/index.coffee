@@ -11,6 +11,20 @@ angular.module('tmsApp', ['ngRoute'])
         controller: 'IndexCtrl'
     })
 ])
-.run(['$location', ($location)->
-    $location.path('/login').replace()
+.run(['$location', '$http', '$route', ($location, $http, $route)->
+    token = localStorage.getItem('x-token')
+    if token
+        $http.post('#{Tms.apiAddress}/api/user/autologin', {token: token})
+        .then((res)->
+            if res.data is true
+                $http.defaults.headers.common['x-token'] = token
+                localStorage.setItem('x-token', token)
+                $route.reload()
+            else
+               $location.path('/login').replace() 
+        ,()->
+            $location.path('/login').replace()
+        )
+    else
+        $location.path('/login').replace()
 ])

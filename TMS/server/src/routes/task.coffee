@@ -2,7 +2,7 @@ express = require('express')
 router = express.Router()
 db = require('./../libs/db')
 taskBiz = require('./../bizs/taskBiz')
-common = require('./../bizs/commonBiz')
+commonBiz = require('./../bizs/commonBiz')
 
 router.post('/task', commonBiz.setUserInfo, commonBiz.validateUserInfo, taskBiz.addTask)
 
