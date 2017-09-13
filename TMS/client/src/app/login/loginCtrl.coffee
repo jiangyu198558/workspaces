@@ -10,7 +10,8 @@ angular.module('tmsApp')
         username: $scope.userEntity.username
         password: $scope.userEntity.password
       }).then((res)->
-        if $scope.userEntity.rememberMe localStorage.setItem('username', $scope.userEntity.username)
+        if $scope.userEntity.rememberMe 
+          localStorage.setItem('username', $scope.userEntity.username)
         else
           localStorage.removeItem('username')
 
