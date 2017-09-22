@@ -54,9 +54,10 @@ autoLogin = (req, res, next) ->
     )
 
 logout = (req, res, next) ->
-    db.users.update({_id: req.userInfo._id}, {$set: {token: token, expiredTime: expiredTime}}, (err, num)->
+    db.users.update({_id: req.userInfo._id}, {$set: {token: "", expiredTime: Date.now()}}, (err, num)->
         return next(err) if err
         return next(new Error('注销失败，请重试！')) if num is 0
+        res.json(true)
     )
 
 module.exports = {

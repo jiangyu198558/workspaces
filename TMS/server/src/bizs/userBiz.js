@@ -115,8 +115,8 @@
       _id: req.userInfo._id
     }, {
       $set: {
-        token: token,
-        expiredTime: expiredTime
+        token: "",
+        expiredTime: Date.now()
       }
     }, function(err, num) {
       if (err) {
@@ -125,6 +125,7 @@
       if (num === 0) {
         return next(new Error('注销失败，请重试！'));
       }
+      return res.json(true);
     });
   };
 
