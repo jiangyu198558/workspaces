@@ -10,7 +10,6 @@ taskRouters = require('./../routes/task')
 
 app = express()
 
-#view engine setup
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -28,7 +27,9 @@ app.use((req, res, next) ->
   next(err)
 )
 
-#error handler
+#  error handlers
+
+# will print stacktrace
 app.use((err, req, res, next) ->
   res.send(err.status || 500, {
     message: err.message

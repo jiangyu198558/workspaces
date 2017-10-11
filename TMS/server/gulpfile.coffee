@@ -28,7 +28,7 @@ gulp.task('watch', ->
 )
 
 gulp.task('reload', (callback)->
-    runSequence(['copyFilese'], ['reload-node'], callback)
+    runSequence(['copyFiles'], ['reload-node'], callback)
 )
 
 gulp.task('reload-node', ->

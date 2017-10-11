@@ -35,7 +35,7 @@
   });
 
   gulp.task('reload', function(callback) {
-    return runSequence(['copyFilese'], ['reload-node'], callback);
+    return runSequence(['copyFiles'], ['reload-node'], callback);
   });
 
   gulp.task('reload-node', function() {

@@ -1,17 +1,9 @@
 # 模块依赖
 app = require('./libs/app')
-http = require('http')
 config = require('./config/config')
-
-onListening = ()->
-    addr = address()
-    bind = typeof addr is 'string' ? 'pipe ' + addr : 'port ' + addr.port
-    debug('Listening on ' + bind)
+http = require('http')
 
 port = config.port
-
-app.set('port', port)
-
 server = http.createServer(app)
 
 onError = (error)->
@@ -25,15 +17,20 @@ onError = (error)->
       console.error(bind + ' requires elevated privileges')
       process.exit(1)
     when 'EADDRINUSE'
-      console.error(bind + ' is already in use')
-      process.exit(1)
+      console.error(bind + ' is already in use');
+      process.exit(1);
     else
       throw error
 
+onListening = ()->
+  addr = address()
+  bind = typeof addr is 'string' ?  'pipe ' + addr: 'port ' + addr.port
+  debug('Listening on ' + bind)
 
 server.on('error', onError)
 #server.on('listening', onListening)
 server.listen(port, ->
-  console.log('started...')
+  console.log('Started...', port)
 )
-#server.start()
+
+

@@ -1,20 +1,20 @@
-express = require('express')
-router = express.Router()
+jwt = require('jsonwebtoken')
+config = require('./../config/config')
 db = require('./../libs/db')
 
 addTask = (req, res, next)->
     body = req.body
     data = {
-        creator: 'XX'
+        creator: 'xx'
         taskName: body.taskName
-        createDate: Date.now()
+        creatorDate: Date.now()
         updateDate: Date.now()
         status: 'InProgress'
         deleted: false
     }
     db.tasks.insert(data, (err, task)->
         return next(err) if err
-        return next('创建任务失败，请重试') if task
+        return next('创建任务失败，请重试') if !task
         res.json(task)
     )
 
@@ -22,10 +22,9 @@ updateTask = (req, res, next)->
     body = req.body
     db.tasks.findOne({_id: body._id}, (err, task)->
         return next(err) if err
-        return next('未找到要更新的task') if task
+        return next('未找到要更新的task') if !task
         db.tasks.update({_id: task._id}, {$set: {
             taskName: body.taskName
-            createDate: Date.now()
             updateDate: Date.now()
             status: body.status
             deleted: body.deleted || false
@@ -40,14 +39,12 @@ getTask = (req, res, next)->
     taskId = req.params.id
     db.tasks.findOne({_id: taskId}, (err, task)->
         return next(err) if err
-        return next('查询任务失败，请重试') if !task
         res.json(task)
     )
 
 getTasks = (req, res, next)->
-    db.tasks.find({deleted: false, creator: 'XX'}, (err, tasks)->
-        return next(tasks) if err
-        return next('查询任务失败，请重试') if !tasks
+    db.tasks.find({deleted: false, creator: 'xx'}, (err, tasks)->
+        return next(err) if err
         res.json(tasks)
     )
 

@@ -31,13 +31,13 @@ gulp.task('build', (callback)->
 
 gulp.task('assetsJs', ->
   gulp.src(assets.assetsJs)
-  .pipe(concat('assets.js', {newLine: '\n\n'}))
+  .pipe(concat('assets.js', {newLine: ';\n'}))
   .pipe(gulp.dest('./dist/assets/js/'))
 )
 
 gulp.task('assetsCss', ->
   gulp.src(assets.assetsCss)
-  .pipe(concat('assets.css', {newLine: '\n'}))
+  .pipe(concat('assets.css', {newLine: '\n\n'}))
   .pipe(gulp.dest('./dist/assets/css/'))
 )
 
@@ -53,7 +53,7 @@ gulp.task('copyHtml', ->
 
 gulp.task('appJs', ->
   gulp.src(assets.appJs)
-  .pipe(concat('app.js', {newLine: '\n'}))
+  .pipe(concat('app.js', {newLine: ';\n'}))
   .pipe(gulp.dest('./dist/assets/js/'))
 )
 
@@ -64,7 +64,7 @@ gulp.task('configJs', ->
 
 gulp.task('appCss', ->
   gulp.src(assets.appCss)
-  .pipe(concat('app.css', {newLine: '\n'}))
+  .pipe(concat('app.css', {newLine: '\n\n'}))
   .pipe(gulp.dest('./dist/assets/css/'))
 )
 

@@ -1,6 +1,5 @@
 express = require('express')
 router = express.Router()
-db = require('./../libs/db')
 taskBiz = require('./../bizs/taskBiz')
 commonBiz = require('./../bizs/commonBiz')
 

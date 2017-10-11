@@ -3,13 +3,11 @@ router = express.Router()
 userBiz = require('./../bizs/userBiz')
 commonBiz = require('./../bizs/commonBiz')
 
-router.get('/test', (req, res)->
-    res.send('XXX')
-)
-
-router.post('/user/register'
- userBiz.validUserExists
- userBiz.register)
+router.post(
+  '/user/register'
+  userBiz.validUserExists
+  userBiz.register
+  )
 
 router.post(
     '/user/login'
@@ -17,15 +15,16 @@ router.post(
 )
 
 router.post(
-    '/user/logout'
-    commonBiz.setUserInfo
-    commonBiz.validateUserInfo
-    userBiz.logout
+  '/user/logout',
+  commonBiz.setUserInfo
+  commonBiz.validateUserInfo
+  userBiz.logout
 )
 
 router.post(
-    '/user/autologin'
-    userBiz.autoLogin
+  '/user/autologin',
+  userBiz.autoLogin
 )
 
+# Export
 module.exports = router

@@ -11,7 +11,7 @@
       return db.users.findOne({
         token: token,
         expiredTime: {
-          $get: Date.now()
+          $gt: Date.now()
         }
       }, function(err, user) {
         if (!err) {
