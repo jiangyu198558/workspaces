@@ -10,10 +10,6 @@
 
   commonBiz = require('./../bizs/commonBiz');
 
-  router.get('/test', function(req, res) {
-    return res.send('XXX');
-  });
-
   router.post('/user/register', userBiz.validUserExists, userBiz.register);
 
   router.post('/user/login', userBiz.login);

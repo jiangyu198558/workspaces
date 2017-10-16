@@ -18,7 +18,7 @@
       var token;
       token = localStorage.getItem('x-token');
       if (token) {
-        return $http.post('#{Tms.apiAddress}/api/user/autologin', {
+        return $http.post(Tms.apiAddress + "/api/user/autologin", {
           token: token
         }).then(function(res) {
           if (res.data === true) {

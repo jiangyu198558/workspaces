@@ -1,19 +1,19 @@
-# 寮曞叆package
+# 引入package
+fs = require('fs')
 gulp = require('gulp')
-del = require("del")
+runSequence = require('run-sequence')
+del = require('del')
 uglify = require('gulp-uglify')
 concat = require('gulp-concat')
 minifyCss = require('gulp-minify-css')
-#unCss = require('gulp-uncss')
+# unCss = require('gulp-uncss')
 browserSync = require('browser-sync').create()
-runSequence = require('run-sequence')
-fs = require('fs')
 
-# 鑾峰彇鍙傛暟
-assets = JSON.parse(fs.readFileSync('assets.json'));
+# 获取参数
+assets = JSON.parse(fs.readFileSync('assets.json'))
 
-# 鏋勫缓浠诲姟閮ㄥ垎
-gulp.task('default', (callback)->
+# 构建任务部分
+gulp.task('default',(callback) ->
   runSequence(['clean'], ['build'], ['serve', 'watch'], callback)
 )
 
@@ -21,14 +21,15 @@ gulp.task('clean', (callback)->
   del(['./dist/'], callback)
 )
 
-gulp.task('build', (callback)->
+gulp.task('build', (callback) ->
   runSequence(
-   ['assetsJs', 'assetsCss', 'assetsFonts'],
-   ['appJs', 'appCss', 'copyHtml', 'configJs'], 
-   callback
+    ['assetsJs', 'assetsCss', 'assetsFonts'],
+    ['appJs', 'appCss', 'copyHtml', 'configJs'],
+    callback
   )
 )
 
+# 资源文件处理
 gulp.task('assetsJs', ->
   gulp.src(assets.assetsJs)
   .pipe(concat('assets.js', {newLine: ';\n'}))
@@ -45,6 +46,8 @@ gulp.task('assetsFonts', ->
   gulp.src(assets.assetsFonts)
   .pipe(gulp.dest('./dist/assets/fonts/'))
 )
+
+# app文件处理
 
 gulp.task('copyHtml', ->
   gulp.src(['./src/**/*.html'])
@@ -73,7 +76,7 @@ gulp.task('serve', ->
     server: {
       baseDir: './dist/'
     }
-    port: 8008
+    port: 7411
   })
 )
 

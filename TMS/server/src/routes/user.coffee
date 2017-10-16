@@ -10,8 +10,8 @@ router.post(
   )
 
 router.post(
-    '/user/login'
-    userBiz.login    
+  '/user/login'
+  userBiz.login
 )
 
 router.post(

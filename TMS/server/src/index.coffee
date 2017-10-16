@@ -1,4 +1,3 @@
-# 模块依赖
 app = require('./libs/app')
 config = require('./config/config')
 http = require('http')
@@ -6,12 +5,10 @@ http = require('http')
 port = config.port
 server = http.createServer(app)
 
-onError = (error)->
+onError = (error) ->
   if error.syscall isnt 'listen'
     throw error
-
-  bind = typeof port is 'string' ? 'Pipe ' + port : 'Port ' + port
-
+  bind = typeof port is 'string' ? 'Pipe ' + port: 'Port ' + port
   switch error.code
     when 'EACCES'
       console.error(bind + ' requires elevated privileges')

@@ -10,6 +10,8 @@
 
   dbPath = config.dbFilePath;
 
+  console.log(dbPath);
+
   db.users = new Datastore(dbPath + 'users.db');
 
   db.users.loadDatabase();

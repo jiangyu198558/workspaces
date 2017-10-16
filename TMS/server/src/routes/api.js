@@ -15,6 +15,7 @@
       if (err) {
         return next(err);
       }
+      console.log(user);
       return res.json(user);
     });
   });

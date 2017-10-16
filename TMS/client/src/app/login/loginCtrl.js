@@ -14,9 +14,8 @@
           password: $scope.userEntity.password
         }).then(function(res) {
           var token;
-          if ($scope.userEntity.rememberMe){
-              localStorage.setItem('username', $scope.userEntity.username);
-
+          if ($scope.userEntity.rememberMe) {
+            localStorage.setItem('username', $scope.userEntity.username);
           } else {
             localStorage.removeItem('username');
           }

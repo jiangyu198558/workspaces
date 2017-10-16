@@ -4,22 +4,11 @@
 
   app = require('./libs/app');
 
-  http = require('http');
-
   config = require('./config/config');
 
-  onListening = function() {
-    var addr, bind, ref;
-    addr = address();
-    bind = (ref = typeof addr === 'string') != null ? ref : 'pipe ' + {
-      addr: 'port ' + addr.port
-    };
-    return debug('Listening on ' + bind);
-  };
+  http = require('http');
 
   port = config.port;
-
-  app.set('port', port);
 
   server = http.createServer(app);
 
@@ -43,10 +32,19 @@
     }
   };
 
+  onListening = function() {
+    var addr, bind, ref;
+    addr = address();
+    bind = (ref = typeof addr === 'string') != null ? ref : 'pipe ' + {
+      addr: 'port ' + addr.port
+    };
+    return debug('Listening on ' + bind);
+  };
+
   server.on('error', onError);
 
   server.listen(port, function() {
-    return console.log('started...');
+    return console.log('Started...', port);
   });
 
 }).call(this);

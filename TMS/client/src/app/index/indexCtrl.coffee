@@ -1,65 +1,60 @@
 angular.module('tmsApp')
-.controller('IndexCtrl', ['$scope', '$location', '$http', '$rootScope', 'tmsUtil', ($scope, $location, $http, $rootScope, tmsUtil)->
-    #scope å˜é‡
+.controller('IndexCtrl', ['$scope', '$location', '$http', 'tmsUtil', ($scope, $location, $http, tmsUtil) ->
+    # scope±äÁ¿
     $scope.task = {
-        taskName: ''
+      taskName: ''
     }
     $scope.taskList = []
+
     init = ->
-        $http.get("#{Tms.apiAddress}/api/task")
-        .then((res)->
-            tasks = res.data
-            $scope.taskList = tasks
-        ,tmsUtil.processHttpError)
-    #UI æ“ä½œ
-    $scope.changeTaskStatus = (task)->
-        task.status = if task.checked then 'Finish' else 'InProgress'
+      console.log(2)
+      $http.get("#{Tms.apiAddress}/api/task")
+      .then((res) ->
+        tasks = res.data
+        $scope.taskList = tasks
+      , tmsUtil.processHttpError)
 
-    $scope.deleteTask = (task, index)->
-        task.deleted = true
-        $http.put("#{Tms.apiAddress}/api/task", task)
-        .then((res)->
-            $scope.taskList.splice(index, 1)
-        ,tmsUtil.processHttpError)
+    $scope.exit =  ->
+      $http.post("#{Tms.apiAddress}/api/user/logout")
+      .then(->
+        alert('Logout succeed.')
+        $location.path('/login')
+      , tmsUtil.processHttpError)
 
-    $scope.editTask = (task)->
-        task.isEditing = true
-        task.tempTaskName = task.taskName
-        
-
-    $scope.cancelEditTask = (task)->
+    $scope.changeTaskStatus = (task) ->
+      task.status = if task.checked then 'Finish' else 'InProgress'
+    $scope.deleteTask = (task, index) ->
+      task.deleted = true
+      $http.put("#{Tms.apiAddress}/api/task", task)
+      .then(->
+        $scope.taskList.splice(index, 1)
+      , tmsUtil.processHttpError)
+    $scope.editTask = (task) ->
+      task.isEditing = true
+      task.tempTaskName = task.taskName
+    $scope.cancelEditTask = (task) ->
+      task.isEditing = false
+    $scope.saveTask = (task) ->
+      oldTaskName = task.taskName
+      task.taskName = task.tempTaskName
+      $http.put("#{Tms.apiAddress}/api/task", task)
+      .then((res) ->
         task.isEditing = false
-
-    $scope.saveTask = (task)->
-        oldTaskName = task.taskName
-        task.taskName = task.tempTaskName
-        $http.put("#{Tms.apiAddress}/api/task", task)
-        .then((res)->
-            task.isEditing = false
-        ,(err)->
-            task.isEditing = false
-            task.taskName = oldTaskName
-            tmsUtil.processHttpError
-        )
-
+      , (res) ->
+        task.taskName = oldTaskName
+        tmsUtil.processHttpError(res)
+      )
+    # UI²Ù×÷
     $scope.addTask = ->
-        task = angular.copy($scope.task)
-        $http.post("#{Tms.apiAddress}/api/task", {
-            taskName: $scope.task.taskName
-        }).then((res)->
-            newTask = res.data
-            task._id = newTask._id
-            task.deleted = newTask.deleted
-            $scope.taskList.push(task)
-            $scope.task.taskName = ''
-        ,tmsUtil.processHttpError)
-
-    $scope.exit = ->
-        $http.post("#{Tms.apiAddresss}/api/user/logout")
-        .then((res)->
-            alert('æ³¨é”€æˆåŠŸ')
-            $location.path('/login')
-        ,tmsUtil.processHttpError)
+      task = angular.copy($scope.task)
+      $http.post("#{Tms.apiAddress}/api/task", {taskName: task.taskName })
+      .then((res) ->
+        newTask = res.data
+        task._id = newTask._id
+        task.deleted = newTask.deleted
+        $scope.taskList.push(task)
+        $scope.task.taskName = ''
+      , tmsUtil.processHttpError)
 
     init()
-])
+  ])

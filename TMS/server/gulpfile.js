@@ -40,7 +40,7 @@
 
   gulp.task('reload-node', function() {
     developServer.restart();
-    return gulp.src('./dist/index.js').pipe(notify('Server restarted...'));
+    return gulp.src('./dist/index.js').pipe(notify('Server restarted ...'));
   });
 
 }).call(this);

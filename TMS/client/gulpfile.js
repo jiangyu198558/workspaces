@@ -2,9 +2,13 @@
 (function() {
   var assets, browserSync, concat, del, fs, gulp, minifyCss, runSequence, uglify;
 
+  fs = require('fs');
+
   gulp = require('gulp');
 
-  del = require("del");
+  runSequence = require('run-sequence');
+
+  del = require('del');
 
   uglify = require('gulp-uglify');
 
@@ -13,10 +17,6 @@
   minifyCss = require('gulp-minify-css');
 
   browserSync = require('browser-sync').create();
-
-  runSequence = require('run-sequence');
-
-  fs = require('fs');
 
   assets = JSON.parse(fs.readFileSync('assets.json'));
 
@@ -34,13 +34,13 @@
 
   gulp.task('assetsJs', function() {
     return gulp.src(assets.assetsJs).pipe(concat('assets.js', {
-      newLine: '\n\n'
+      newLine: ';\n'
     })).pipe(gulp.dest('./dist/assets/js/'));
   });
 
   gulp.task('assetsCss', function() {
     return gulp.src(assets.assetsCss).pipe(concat('assets.css', {
-      newLine: '\n'
+      newLine: '\n\n'
     })).pipe(gulp.dest('./dist/assets/css/'));
   });
 
@@ -54,7 +54,7 @@
 
   gulp.task('appJs', function() {
     return gulp.src(assets.appJs).pipe(concat('app.js', {
-      newLine: '\n'
+      newLine: ';\n'
     })).pipe(gulp.dest('./dist/assets/js/'));
   });
 
@@ -64,7 +64,7 @@
 
   gulp.task('appCss', function() {
     return gulp.src(assets.appCss).pipe(concat('app.css', {
-      newLine: '\n'
+      newLine: '\n\n'
     })).pipe(gulp.dest('./dist/assets/css/'));
   });
 
@@ -73,7 +73,7 @@
       server: {
         baseDir: './dist/'
       },
-      port: 8008
+      port: 7411
     });
   });
 

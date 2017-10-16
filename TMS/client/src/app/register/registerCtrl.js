@@ -9,13 +9,13 @@
       };
       return $scope.doRegister = function() {
         if ($scope.userEntity.password !== $scope.userEntity.password2) {
-          return alert('两次密码不一致！');
+          return alert('两次密码不一致');
         }
         return $http.post(Tms.apiAddress + "/api/user/register", {
           username: $scope.userEntity.username,
           password: $scope.userEntity.password2
         }).then(function(res) {
-          alert('注册成功');
+          alert('注册成功！');
           return $location.path('/login');
         }, tmsUtil.processHttpError);
       };
